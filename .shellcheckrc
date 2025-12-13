@@ -1,0 +1,14 @@
+# shellcheck configuration
+# https://www.shellcheck.net/wiki/
+
+# Use bash shell by default
+shell=bash
+
+# Enable all checks by default, then exclude specific ones
+enable=all
+
+# Exclude specific checks if needed:
+# SC2034: Unused variables (sometimes needed for sourcing)
+# SC1091: Not following sourced files (can't always resolve paths)
+# SC2310: Function invoked in condition disables set -e (intentional pattern)
+disable=SC1091,SC2310

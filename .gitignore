@@ -1,0 +1,29 @@
+# Tools directory (downloaded binaries - users install via check_prerequisites.sh)
+tools/
+
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+
+# Keep .env.tools (no secrets, just PATH setup)
+!.env.tools
+
+# Editor/IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# Session context (development notes)
+SESSION_CONTEXT.md

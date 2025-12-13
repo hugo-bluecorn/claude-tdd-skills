@@ -1,0 +1,17 @@
+# bashunit configuration
+# https://bashunit.typeddevs.com/configuration
+
+# Output format: default, dots, or junit
+BASHUNIT_DEFAULT_FORMAT=default
+
+# Show header with bashunit info
+BASHUNIT_SHOW_HEADER=true
+
+# Stop on first failure
+BASHUNIT_STOP_ON_FAILURE=false
+
+# Verbose output
+BASHUNIT_VERBOSE=true
+
+# Color output
+BASHUNIT_COLOR=true
