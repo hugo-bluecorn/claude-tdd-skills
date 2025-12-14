@@ -21,7 +21,7 @@ source "${SCRIPT_DIR}/../scripts/template_updater.sh" 2>/dev/null || true
 function test_get_templates_dir_returns_path() {
   local templates_dir
   templates_dir=$(get_templates_dir)
-  assert_contains "templates" "${templates_dir}"
+  assert_contains "assets" "${templates_dir}"
 }
 
 # ============================================================

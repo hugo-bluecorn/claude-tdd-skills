@@ -1,63 +1,86 @@
-# Claude Code Memory: TDD Skill Builder Project
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Core Directive: Test-Driven Development
 
-**Always use TDD (Red-Green-Refactor) when creating or modifying code in this project.**
+**Always use TDD (Red-Green-Refactor) when creating or modifying code.**
 
-### TDD Workflow
-
-1. **RED**: Write failing tests first, then run to confirm failure
+1. **RED**: Write failing tests first, run to confirm failure
 2. **GREEN**: Write minimum code to pass tests
 3. **REFACTOR**: Clean up with shellcheck/shfmt, verify tests still pass
 
-### When to Apply TDD
+**Apply TDD to:** Shell scripts, template files, SKILL.md with verifiable requirements.
+**Skip TDD for:** Config files (`.bashunitrc`, `.shellcheckrc`, `.editorconfig`), pure documentation.
 
-- Shell scripts (`.sh` files)
-- Template files with testable structure
-- SKILL.md and other markdown files with verifiable requirements
-- Any code that can be validated programmatically
+## Commands
 
-### TDD is Not Required For
-
-- Configuration files (`.bashunitrc`, `.shellcheckrc`, `.editorconfig`)
-- Pure documentation without structural requirements
-- Directory structure creation
-
-### Quality Gates
-
-Before marking any code complete:
+All tools are in `tools/`. Always use project-local versions.
 
 ```bash
-# 1. All tests pass
+# Run all tests
 ./tools/bashunit .claude/skills/tdd-skill-builder/tests/
 
-# 2. No shellcheck errors
+# Run single test file
+./tools/bashunit .claude/skills/tdd-skill-builder/tests/skill_validator_test.sh
+
+# Run specific test function (filter by name)
+./tools/bashunit --filter "test_validates_skill_name" .claude/skills/tdd-skill-builder/tests/
+
+# Static analysis
 ./tools/shellcheck .claude/skills/tdd-skill-builder/scripts/*.sh
 
-# 3. Proper formatting
+# Format check (diff mode)
+./tools/shfmt -d -i 2 -ci .claude/skills/tdd-skill-builder/scripts/*.sh
+
+# Auto-format in place
+./tools/shfmt -w -i 2 -ci .claude/skills/tdd-skill-builder/scripts/*.sh
+
+# Install/verify tools
+./.claude/skills/tdd-skill-builder/scripts/check_prerequisites.sh --download
+```
+
+## Quality Gates
+
+Before marking code complete, all three must pass:
+
+```bash
+./tools/bashunit .claude/skills/tdd-skill-builder/tests/
+./tools/shellcheck .claude/skills/tdd-skill-builder/scripts/*.sh
 ./tools/shfmt -d -i 2 -ci .claude/skills/tdd-skill-builder/scripts/*.sh
 ```
 
-## Project Tools
+## Architecture
 
-Tools are installed in `tools/` directory. Always use project-local tools:
+This is a Claude Code Skill that helps build other skills using TDD.
 
-```bash
-./tools/bashunit .claude/skills/tdd-skill-builder/tests/
-./tools/shellcheck .claude/skills/tdd-skill-builder/scripts/*.sh
-./tools/shfmt -d -i 2 -ci .claude/skills/tdd-skill-builder/scripts/*.sh
 ```
+.claude/skills/tdd-skill-builder/
+├── SKILL.md              # Skill definition (triggers on "create a skill")
+├── scripts/              # Implementation
+│   ├── init_skill.sh           # Initialize new skill with TDD structure
+│   ├── check_prerequisites.sh  # Tool installer/verifier
+│   ├── skill_validator.sh      # Validates skill structure
+│   └── template_updater.sh     # Template management
+├── tests/                # bashunit tests (*_test.sh)
+├── assets/               # SKILL.md, script, test templates
+├── references/           # style_guide.md, bash-testing-guide.md, anthropic-compliance.md
+└── examples/hello-world/ # Working example skill
+```
+
+Test files mirror scripts: `scripts/foo.sh` → `tests/foo_test.sh`
 
 ## Git Workflow
 
-Follow `.claude/version-control.md` for:
-- Branch naming conventions
-- Commit message format (Conventional Commits)
-- PR process
-- CHANGELOG updates
+See `.claude/version-control.md` for full details.
+
+- **Branches**: `feature/`, `fix/`, `docs/`, `refactor/`, `test/`, `chore/` prefixes
+- **Commits**: Conventional Commits format (`feat:`, `fix:`, `docs:`, etc.)
+- **PRs**: Update CHANGELOG.md for every PR
+- **Merge**: Squash and merge preferred
 
 ## References
 
-- Official Skill Spec: https://code.claude.com/docs/en/skills
-- bashunit: https://bashunit.typeddevs.com/
-- Google Shell Style Guide: https://google.github.io/styleguide/shellguide.html
+- [Official Skill Spec](https://code.claude.com/docs/en/skills)
+- [bashunit](https://bashunit.typeddevs.com/)
+- [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)

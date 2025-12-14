@@ -32,18 +32,20 @@ description: >-
 
 ## Scripts
 
+- `scripts/init_skill.sh` - Initialize new skill with TDD structure
 - `scripts/check_prerequisites.sh` - Verify/install tools (bashunit, shellcheck, shfmt)
 - `scripts/skill_validator.sh` - Validate skill structure
 - `scripts/template_updater.sh` - Manage templates
 
-## Structure
+## Structure (Official Anthropic Format)
 
 ```
 skill-name/
-├── SKILL.md
-├── scripts/
-├── tests/
-└── templates/
+├── SKILL.md        # Required: frontmatter + instructions
+├── scripts/        # Executable code
+├── tests/          # bashunit tests
+├── references/     # Documentation loaded into context
+└── assets/         # Templates for output generation
 ```
 
 ## Setup
@@ -54,5 +56,6 @@ skill-name/
 
 ## Resources
 
-- [style_guide.md](resources/style_guide.md) - Basic TDD patterns
-- [bash-testing-guide.md](resources/bash-testing-guide.md) - Comprehensive bashunit guide
+- [style_guide.md](references/style_guide.md) - Basic TDD patterns
+- [bash-testing-guide.md](references/bash-testing-guide.md) - Comprehensive bashunit guide
+- [anthropic-compliance.md](references/anthropic-compliance.md) - Anthropic skill specification compliance

@@ -339,3 +339,29 @@ function test_validate_skill_name_rejects_invalid() {
   validate_skill_name "" &>/dev/null || exit_code=$?
   assert_equals 1 "${exit_code}"
 }
+
+# ============================================================
+# CLI Tests
+# ============================================================
+
+# Test: --help flag shows usage and exits successfully
+function test_help_flag_shows_usage() {
+  local script_path="${SCRIPT_DIR}/../scripts/skill_validator.sh"
+  local result
+  local exit_code=0
+
+  result=$("${script_path}" --help 2>&1) || exit_code=$?
+  assert_equals 0 "${exit_code}"
+  assert_contains "Usage:" "${result}"
+}
+
+# Test: -h flag shows usage and exits successfully
+function test_h_flag_shows_usage() {
+  local script_path="${SCRIPT_DIR}/../scripts/skill_validator.sh"
+  local result
+  local exit_code=0
+
+  result=$("${script_path}" -h 2>&1) || exit_code=$?
+  assert_equals 0 "${exit_code}"
+  assert_contains "Usage:" "${result}"
+}

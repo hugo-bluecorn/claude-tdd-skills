@@ -1,11 +1,11 @@
 #!/bin/bash
-# Tests for template files
+# Tests for asset files (templates)
 # TDD RED phase: These tests are written BEFORE implementation
 
 # Get the directory of this test file
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../../../.." && pwd)"
-TEMPLATES_DIR="${SCRIPT_DIR}/../templates"
+TEMPLATES_DIR="${SCRIPT_DIR}/../assets"
 
 # Add project tools to PATH
 [[ -d "${PROJECT_ROOT}/tools" ]] && export PATH="${PROJECT_ROOT}/tools:${PATH}"

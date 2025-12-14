@@ -201,19 +201,41 @@ validate_skill_structure() {
   fi
 }
 
+# Show usage information
+show_usage() {
+  echo "Usage: skill_validator.sh <skill_directory>"
+  echo ""
+  echo "Validates a Claude Code Skill directory structure and SKILL.md format."
+  echo ""
+  echo "Options:"
+  echo "  -h, --help    Show this help message"
+  echo ""
+  echo "Example:"
+  echo "  skill_validator.sh .claude/skills/my-skill"
+}
+
 # Main function when run directly
 main() {
-  if [[ $# -lt 1 ]]; then
-    echo "Usage: skill_validator.sh <skill_directory>"
-    echo ""
-    echo "Validates a Claude Code Skill directory structure and SKILL.md format."
-    echo ""
-    echo "Example:"
-    echo "  skill_validator.sh .claude/skills/my-skill"
+  # Handle help flags first
+  if [[ $# -eq 0 ]]; then
+    show_usage
     return 1
   fi
 
-  validate_skill_structure "$1"
+  case "$1" in
+    -h | --help)
+      show_usage
+      return 0
+      ;;
+    -*)
+      echo "ERROR: Unknown option: $1"
+      show_usage
+      return 1
+      ;;
+    *)
+      validate_skill_structure "$1"
+      ;;
+  esac
 }
 
 # Only run if executed directly (not sourced)

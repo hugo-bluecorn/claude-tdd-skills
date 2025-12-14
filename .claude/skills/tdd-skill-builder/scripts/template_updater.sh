@@ -11,7 +11,7 @@ fi
 # shellcheck disable=SC2034  # Reserved for future use when fetching from remote
 readonly ANTHROPIC_SKILLS_BASE="https://raw.githubusercontent.com/anthropics/claude-code/main"
 
-# Get the templates directory
+# Get the assets directory (templates)
 # Can be overridden by TEMPLATES_DIR environment variable
 get_templates_dir() {
   if [[ -n "${TEMPLATES_DIR:-}" ]]; then
@@ -23,7 +23,7 @@ get_templates_dir() {
   local dir="${PWD}"
   while [[ "${dir}" != "/" ]]; do
     if [[ -f "${dir}/SKILL.md" ]]; then
-      echo "${dir}/templates"
+      echo "${dir}/assets"
       return
     fi
     # Also check for .claude/skills structure
@@ -31,20 +31,20 @@ get_templates_dir() {
       # Find first skill with templates
       local skill_dir
       for skill_dir in "${dir}/.claude/skills"/*/; do
-        if [[ -d "${skill_dir}templates" ]]; then
-          echo "${skill_dir}templates"
+        if [[ -d "${skill_dir}assets" ]]; then
+          echo "${skill_dir}assets"
           return
         fi
       done
-      # Default to tdd-skill-builder templates
-      echo "${dir}/.claude/skills/tdd-skill-builder/templates"
+      # Default to tdd-skill-builder assets
+      echo "${dir}/.claude/skills/tdd-skill-builder/assets"
       return
     fi
     dir=$(dirname "${dir}")
   done
 
   # Fallback to current directory
-  echo "${PWD}/templates"
+  echo "${PWD}/assets"
 }
 
 # Download a single template file

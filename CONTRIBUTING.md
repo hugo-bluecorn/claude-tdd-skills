@@ -125,11 +125,12 @@ chore: update tool versions
 
 ```
 .claude/skills/tdd-skill-builder/
-├── scripts/    # Implementation (check_prerequisites.sh, skill_validator.sh, etc.)
-├── tests/      # Test files (*_test.sh)
-├── templates/  # Code templates
-├── resources/  # Style guides and documentation
-└── examples/   # Example skills (hello-world)
+├── SKILL.md     # Skill definition
+├── scripts/     # Implementation (init_skill.sh, check_prerequisites.sh, skill_validator.sh, template_updater.sh)
+├── tests/       # Test files (*_test.sh)
+├── assets/      # Code templates (SKILL.template.md, script.template.sh, test.template.sh)
+├── references/  # Style guide, bash testing guide, Anthropic compliance
+└── examples/    # Example skills (hello-world)
 ```
 
 ## Resources

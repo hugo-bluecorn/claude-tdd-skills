@@ -1,11 +1,11 @@
 #!/bin/bash
-# Tests for resources/style_guide.md
+# Tests for references/style_guide.md
 # TDD RED phase: Tests verify style guide meets requirements
 
 # Get the directory of this test file
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../../../.." && pwd)"
-STYLE_GUIDE="${SCRIPT_DIR}/../resources/style_guide.md"
+STYLE_GUIDE="${SCRIPT_DIR}/../references/style_guide.md"
 
 # Add project tools to PATH
 [[ -d "${PROJECT_ROOT}/tools" ]] && export PATH="${PROJECT_ROOT}/tools:${PATH}"
